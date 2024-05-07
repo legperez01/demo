@@ -21,6 +21,15 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
-tasks.named('test') {
+tasks.test {
 	useJUnitPlatform()
+}
+
+tasks.bootBuildImage {
+	docker {
+		publishRegistry {
+			username = project.findProperty('registryUsername')
+			password = project.findProperty('registryToken')
+		}
+	}
 }
